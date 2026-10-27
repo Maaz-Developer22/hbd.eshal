@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Eshal!</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init({
+    publicKey: "r6i-_NNyA4f5ksIFk"
+  });
+</script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+  color: #fff7fc;
+  background: radial-gradient(circle at top left, #ffd5e8 0, transparent 38%),
+              radial-gradient(circle at bottom right, #c9c4ff 0, transparent 42%),
+              linear-gradient(135deg, #24123f, #512b72 52%, #2b315f);
+  color: #fff7fc;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  position: relative;
+  isolation: isolate;
+}
+
+#app::before {
+  content: "✨  🌸  ⭐  💗  🎀  ✨";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  font-size: clamp(20px, 5vw, 40px);
+  letter-spacing: 18px;
+  line-height: 2.5;
+  overflow: hidden;
+  opacity: .4;
+  overflow-wrap: anywhere;
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-12px); }
+}
+
+.card {
+  width: min(720px, 100%);
+  min-height: min(620px, calc(100dvh - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(16px, 4vw, 38px);
+  border: 1px solid #ffffff80;
+  border-radius: 32px;
+  background: linear-gradient(145deg, #ffffffed, #fff0f8f2);
+  box-shadow: 0 24px 80px #10092380;
+  color: #6e356d;
+  position: relative;
+}
+
+.screen { display: none; }
+.screen.active { display: block; animation: appear .3s ease; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tag {
+  display: inline-block;
+  background: #ffe2f0;
+  border-radius: 30px;
+  padding: 8px 14px;
+  font-size: .75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1, h2 {
+  color: #8e3d86;
+  line-height: 1.1;
+  margin: 16px 0;
+}
+
+h1 { font-size: clamp(2.2rem, 8vw, 4.2rem); }
+h2 { font-size: clamp(1.8rem, 6vw, 3rem); }
+
+.art {
+  font-size: clamp(3.5rem, 13vw, 6rem);
+  margin: 14px 0;
+  animation: float 3s ease-in-out infinite;
+}
+
+p {
+  line-height: 1.55;
+  color: #72536f;
+  font-size: clamp(.9rem, 3vw, 1.08rem);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.envelope {
+  width: min(360px, 100%);
+  margin: 18px auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e7b9dc;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fff7fc, #f9d9ed);
+  color: #884b79;
+  font-weight: bold;
+  box-shadow: 0 12px 30px #8c4c8d20;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.envelope:hover { transform: translateY(-3px); box-shadow: 0 16px 34px #8c4c8d30; }
+.envelopeIcon { font-size: 4rem; }
+.tinyHeart { font-size: 1.7rem; color: #d45c9e; }
+#letterContent {
+  padding: 14px 18px;
+  margin: 12px auto;
+  border: 1px dashed #d9a5cf;
+  border-radius: 20px;
+  background: #fff9fd;
+  max-width: 520px;
+}
+#letterContent[hidden] { display: none; }
+
+
+.btn {
+  border: 0;
+  border-radius: 30px;
+  padding: 12px 19px;
+  margin: 5px;
+  background: linear-gradient(120deg, #f47bb5, #b58af5);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 0 #b66caa40;
+  transition: transform .15s;
+}
+
+.btn:active { transform: scale(.96); }
+
+.btn.alt {
+  background: #fff0c9;
+  color: #884b79;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 440px;
+  margin: 18px auto;
+}
+
+.answer {
+  padding: 14px 6px;
+  border: 2px solid #f3c2df;
+  border-radius: 17px;
+  background: white;
+  color: #884b79;
+  font-weight: bold;
+}
+
+.answer:hover { background: #fff0d2; }
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f3c2df;
+  border-radius: 17px;
+  font: inherit;
+  color: #793d70;
+  margin: 8px auto;
+  background: white;
+}
+
+textarea { resize: none; }
+
+.status {
+  min-height: 25px;
+  font-weight: bold;
+  color: #a04489;
+}
+
+.message-screen .art {
+  font-size: clamp(2.8rem, 10vw, 4rem);
+  margin: 4px 0;
+}
+
+.message-screen h2 {
+  margin: 8px 0;
+}
+
+.message-screen > p,
+.message-screen .status {
+  margin: 5px 0;
+}
+
+.message-screen .status {
+  min-height: 18px;
+}
+
+.message-screen input,
+.message-screen textarea {
+  padding: 10px 12px;
+  margin: 5px auto;
+}
+
+.message-screen textarea {
+  height: 76px;
+}
+
+.message-screen .btn {
+  padding: 9px 16px;
+  margin: 3px;
+}
+
+.counter {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  font-size: .7rem;
+  color: #a7789c;
+}
+
+.confetti {
+  position: fixed;
+  top: -30px;
+  pointer-events: none;
+  z-index: 10;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(600deg); opacity: 0; }
+}
+
+@media (max-height: 650px) {
+  .card { padding: 12px; }
+  .art { font-size: 3rem; margin: 5px; }
+  h1, h2 { margin: 8px 0; }
+  p { margin: 8px 0; line-height: 1.35; }
+  .btn { padding: 9px 14px; }
+}
+</style>
+</head>
+
+<body>
+<audio id="birthdaySong" src="sub_clair-happy-birthday-592177.mp3" autoplay preload="auto"></audio>
+<div id="app">
+<div class="card">
+
+  <!-- PAGE 1: WELCOME -->
+  <section class="screen active" data-page="0">
+    <span class="tag">MADE JUST FOR YOU ✨</span>
+    <div class="art">🌙💗🎀</div>
+    <h2 id="welcomeTitle">Someone special has a surprise...</h2>
+    <p id="welcomeText">A little page full of smiles, sweet wishes, and lots of love is waiting just for you.</p>
+    <p><b>From your Bhai Maaz 💌</b></p>
+    <button class="btn alt" id="songToggle" type="button">Play birthday song 🎵</button>
+    <p class="status" id="songStatus" role="status" aria-live="polite"></p>
+    <button class="btn" id="revealBirthday">Open your surprise 💖</button>
+  </section>
+
+  <!-- PAGE 2: CAKE -->
+  <section class="screen" data-page="1">
+    <span class="tag">BIRTHDAY WISH 🌟</span>
+    <h2>Make a wish!</h2>
+    <button class="cakeTap" id="cake" aria-label="Tap the cake to light the candles">🎂</button>
+    <p id="cakeText">Tap the cake to light its candles! ✨</p>
+    <button class="btn" id="wish">I made a wish! 💫</button>
+    <button class="btn alt" data-next="2">Next →</button>
+  </section>
+
+  <!-- PAGE 3: MATH GAME -->
+  <section class="screen" data-page="2">
+    <span class="tag">MINI GAME 1 🧠</span>
+    <div class="art">🧁</div>
+    <h2>Quick Math!</h2>
+    <p>What is <b>7 + 5</b>?</p>
+    <div class="answers">
+      <button class="answer" data-math="10">10</button>
+      <button class="answer" data-math="12">12</button>
+      <button class="answer" data-math="13">13</button>
+      <button class="answer" data-math="14">14</button>
+    </div>
+    <p class="status" id="mathStatus"></p>
+    <button class="btn alt" data-next="3">Next game →</button>
+  </section>
+
+  <!-- PAGE 4: EMOJI GAME -->
+  <section class="screen" data-page="3">
+    <span class="tag">MINI GAME 2 🍭</span>
+    <h2>Guess the treat!</h2>
+    <div class="art">🧊 + 🍦</div>
+    <p>Which treat do these emojis hint at?</p>
+    <div class="answers">
+      <button class="answer" data-puzzle="ice">Ice cream 🍦</button>
+      <button class="answer" data-puzzle="pizza">Pizza 🍕</button>
+      <button class="answer" data-puzzle="cake">Cake 🎂</button>
+      <button class="answer" data-puzzle="juice">Juice 🧃</button>
+    </div>
+    <p class="status" id="puzzleStatus"></p>
+    <button class="btn alt" data-next="4">Next →</button>
+  </section>
+
+  <!-- PAGE 5: MESSAGE -->
+  <section class="screen message-screen" data-page="4">
+    <span class="tag">A LITTLE NOTE 💌</span>
+    <div class="art">🧸💗</div>
+    <h2>Dear Eshal...</h2>
+    <p>Write a little message for your Bhai Maaz. A joke, a wish or anything you like!</p>
+    <form id="birthday-form">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="hidden" name="time">
+      <textarea id="message" name="message" rows="2" maxlength="600" required
+        placeholder="Dear Bhai Maaz... 💗"></textarea>
+      <button class="btn" type="submit">Send message 💌</button>
+      <p class="status" id="email-status" role="status" aria-live="polite"></p>
+    </form>
+    <button class="btn alt" data-next="5">Final surprise →</button>
+  </section>
+
+  <!-- PAGE 6: FINAL SURPRISE -->
+  <section class="screen" data-page="5">
+    <span class="tag">A LETTER FOR YOU 💌</span>
+    <button class="envelope" id="openLetter" aria-label="Open your letter">
+      <span class="envelopeIcon">💌</span>
+      <span id="letterPrompt">Eshal, tap here to open your letter</span>
+      <span class="tinyHeart">♡</span>
+    </button>
+    <div id="letterContent" hidden>
+      <h2>Dear Eshal 💗</h2>
+      <p>Allah tumhari zindagi ko hamesha khushiyon, pyaar aur kamyabi se bhar de. Tumhari har muskurahat qeemti hai, aur tum hamesha yun hi hansti muskurati raho. Sorry surprise thora late hai, lekin tum mere liye bohat special ho. 💕</p>
+      <p><b>Hamesha khush raho!<br>Tumhara Bhai Maaz 💖</b></p>
+      <div class="art">🌷✨💗</div>
+    </div>
+    <button class="btn" id="restart">Start again ↺</button>
+  </section>
+
+</div>
+</div>
+
+<script>
+const birthdaySong = document.getElementById("birthdaySong");
+const songToggle = document.getElementById("songToggle");
+const songStatus = document.getElementById("songStatus");
+
+birthdaySong.play().catch(error => {
+  if (error.name === "NotAllowedError") {
+    songStatus.textContent = "Tap Play birthday song to start the music 🎵";
+  } else {
+    console.error("The birthday song could not be played.", error);
+  }
+});
+
+birthdaySong.addEventListener("playing", () => {
+  songToggle.textContent = "Pause birthday song ⏸";
+  songStatus.textContent = "Birthday song is playing 🎵";
+});
+
+birthdaySong.addEventListener("pause", () => {
+  songToggle.textContent = "Play birthday song 🎵";
+  songStatus.textContent = "";
+});
+
+birthdaySong.addEventListener("error", () => {
+  const error = birthdaySong.error;
+  console.error("The birthday song could not be loaded.", error);
+  songStatus.textContent = window.location.protocol === "file:"
+    ? "Open this page through a local web server to play the song."
+    : "The song could not be loaded. Keep the MP3 in the same folder as this page.";
+});
+
+songToggle.addEventListener("click", () => {
+  if (!birthdaySong.paused) {
+    birthdaySong.pause();
+    return;
+  }
+
+  birthdaySong.play().catch(error => {
+    console.error("The birthday song could not be played.", error);
+    songStatus.textContent = "The song could not be played. Please try again.";
+  });
+});
+
+const screens = [...document.querySelectorAll(".screen")];
+function showPage(number) {
+  screens.forEach((screen, index) => {
+    screen.classList.toggle("active", index === number);
+  });
+}
+
+document.getElementById("revealBirthday").addEventListener("click", () => {
+  document.getElementById("welcomeTitle").innerHTML = "Happy Birthday,<br>Eshal! 🎂";
+  document.getElementById("welcomeText").textContent =
+    "May your day be filled with smiles, sweet moments, cake and beautiful surprises! I'm sorry this surprise is a little late, but it comes with lots of love. 💗";
+  document.getElementById("revealBirthday").textContent = "Let's celebrate! ✨";
+  document.getElementById("revealBirthday").onclick = () => showPage(1);
+  celebrate();
+});
+
+document.querySelectorAll("[data-next]").forEach(button => {
+  button.addEventListener("click", () => {
+    showPage(Number(button.dataset.next));
+  });
+});
+
+function celebrate() {
+  const pieces = ["🎉", "💗", "✨", "🌸", "⭐", "🎊"];
+
+  for (let i = 0; i < 35; i++) {
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.fontSize = 16 + Math.random() * 20 + "px";
+    piece.style.animationDuration = 2 + Math.random() * 2 + "s";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+
+// Cake starts plain; tapping it adds lit candles.
+let candlesLit = false;
+
+document.getElementById("cake").addEventListener("click", () => {
+  if (!candlesLit) {
+    candlesLit = true;
+    document.getElementById("cake").textContent = "🕯️🎂🕯️";
+    document.getElementById("cakeText").textContent =
+      "Yay! Your candles are glowing! Make a wish, Eshal! 💖";
+    celebrate();
+  } else {
+    document.getElementById("cakeText").textContent =
+      "Your candles are already glowing! Make a lovely wish! ✨";
+  }
+});
+
+document.getElementById("wish").addEventListener("click", () => {
+  document.getElementById("cakeText").textContent =
+    "Your birthday wish is off to the stars! 🌟";
+  celebrate();
+});
+
+// Maths game
+document.querySelectorAll("[data-math]").forEach(button => {
+  button.addEventListener("click", () => {
+    const correct = button.dataset.math === "12";
+    document.getElementById("mathStatus").textContent = correct
+      ? "Correct! You're super smart, Eshal! 🎉"
+      : "Good try! Have another guess! 💗";
+    if (correct) celebrate();
+  });
+});
+
+// Emoji puzzle
+document.querySelectorAll("[data-puzzle]").forEach(button => {
+  button.addEventListener("click", () => {
+    const correct = button.dataset.puzzle === "ice";
+    document.getElementById("puzzleStatus").textContent = correct
+      ? "Yes! Ice cream! Brilliant! 🍦🎉"
+      : "Nice try! Look at the emojis again! 💗";
+    if (correct) celebrate();
+  });
+});
+
+const birthdayForm = document.getElementById("birthday-form");
+const emailStatus = document.getElementById("email-status");
+
+birthdayForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const button = birthdayForm.querySelector('button[type="submit"]');
+  birthdayForm.elements.time.value = new Date().toLocaleString();
+  button.disabled = true;
+  button.textContent = "Sending...";
+  emailStatus.textContent = "";
+
+  try {
+    await emailjs.sendForm(
+      "service_xdus8ar",
+      "template_wfxj4ft",
+      birthdayForm
+    );
+    emailStatus.textContent = "Message sent successfully! 🎉";
+    celebrate();
+  } catch (error) {
+    console.error("EmailJS could not send the message.", error);
+    const details = error?.text || error?.message || String(error);
+    emailStatus.textContent = `Couldn't send your message: ${details}`;
+  } finally {
+    button.disabled = false;
+    button.textContent = "Send message 💌";
+  }
+});
+
+// Open the final letter on tap
+document.getElementById("openLetter").addEventListener("click", () => {
+  document.getElementById("letterContent").hidden = false;
+  document.getElementById("letterPrompt").textContent = "Your little letter is open 💗";
+  document.getElementById("openLetter").style.display = "none";
+  celebrate();
+});
+
+// Start again
+document.getElementById("restart").addEventListener("click", () => {
+  document.getElementById("letterContent").hidden = true;
+  document.getElementById("openLetter").style.display = "flex";
+  document.getElementById("letterPrompt").textContent = "Eshal, tap here to open your letter";
+  document.getElementById("welcomeTitle").textContent = "Someone special has a surprise...";
+  document.getElementById("welcomeText").textContent = "A little page full of smiles, sweet wishes, and lots of love is waiting just for you.";
+  document.getElementById("revealBirthday").textContent = "Open your surprise 💖";
+  document.getElementById("revealBirthday").onclick = () => {
+    document.getElementById("welcomeTitle").innerHTML = "Happy Birthday,<br>Eshal! 🎂";
+    document.getElementById("welcomeText").textContent = "May your day be filled with smiles, sweet moments, cake and beautiful surprises! I'm sorry this surprise is a little late, but it comes with lots of love. 💗";
+    document.getElementById("revealBirthday").textContent = "Let's celebrate! ✨";
+    document.getElementById("revealBirthday").onclick = () => showPage(1);
+    celebrate();
+  };
+  candlesLit = false;
+  document.getElementById("cake").textContent = "🎂";
+  document.getElementById("cakeText").textContent =
+    "Tap the cake to light its candles! ✨";
+  document.getElementById("mathStatus").textContent = "";
+  document.getElementById("puzzleStatus").textContent = "";
+  showPage(0);
+});
+</script>
+</body>
+</html>
